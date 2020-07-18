@@ -39,7 +39,7 @@ public class Item: NSManagedObject {
         // Give properties initial values
         itemTitle = "Untitled item"
         notes = ""
-        itemImage = UIImage(named: "no item image")
+        itemImage = UIImage(named: "no item image")!
         loanee = Loanee(name: "", contactNumber: "")
     }
 }
