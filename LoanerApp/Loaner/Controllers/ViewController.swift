@@ -52,8 +52,16 @@ class ViewController: UIViewController {
     }
     
     func deleteItem(at index: Int) {
+        //Delete the item from data core context
+        let context = store.persistentContainer.viewContext
+        context.delete(items[index])
+        
+        //Remove item from collection view's data source
         items.remove(at: index)
         collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        
+        //Save context
+        store.saveContext()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -131,6 +139,7 @@ class ViewController: UIViewController {
         //reload the collection view's data source to present the current data set to the user
         self.collectionView.reloadSections(IndexSet(integer: 0))
     }
+    
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
